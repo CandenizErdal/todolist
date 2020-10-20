@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Todo Liste</title>
+</head>
+<body>
+<div class="container">
+
+    <h1>Todo Liste</h1>
+
+    <div id="status">
+    <div class="status-bilgi" id="hepsi" >Hepsi: 0</div>
+    <div class="status-bilgi" id="aktif" >Aktif: 0</div>
+    <div class="status-bilgi" id="yapildi" >Yapıldı: 0</div>
+  </div>
+    <form class="todo-form">
+      <input type="text" class="todo-yaz" placeholder="Yapılacak iş ekle">
+      <br>
+      <button type="submit" class="ekle-buton">Ekle</button>
+      <button class="temizle-buton">Temizle</button>
+    </form>
+
+    <ul class="todo-items">
+    </ul>
+
+  </div>
+  <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
