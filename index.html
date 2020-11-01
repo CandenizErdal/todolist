@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-  <meta charset="UTF-8">
+<head><meta charset="utf-8">
+  <link rel="icon" href="todo.ico">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+  
   <title>Todo Liste</title>
 </head>
 <body>
 <div class="container">
-
     <h1>Todo Liste</h1>
-
     <div id="status">
     <div class="status-bilgi" id="hepsi" >Hepsi: 0</div>
     <div class="status-bilgi" id="aktif" >Aktif: 0</div>
-    <div class="status-bilgi" id="yapildi" >Yapıldı: 0</div>
+    <div class="status-bilgi" id="yapildi">Yapıldı: 0</div>
   </div>
     <form class="todo-form">
       <input type="text" class="todo-yaz" placeholder="Yapılacak iş ekle">
@@ -22,8 +22,17 @@
       <button class="temizle-buton">Temizle</button>
     </form>
 
+    <div class="aktif-box">
+      <p style="color: black; text-align: center;">Aktif</p>
     <ul class="todo-items">
     </ul>
+  </div>
+
+  <div class="yapilan-box">
+    <p style="color: black;  text-align: center;">Yapılanlar</p>
+<ul class="yapilanlar">
+</ul>
+</div>
 
   </div>
   <script type="text/javascript" src="script.js"></script>

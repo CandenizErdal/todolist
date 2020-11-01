@@ -1,8 +1,7 @@
 const todoForm = document.querySelector('.todo-form');
 const todoInput = document.querySelector('.todo-yaz');
 const todoItemsList = document.querySelector('.todo-items');
-
-
+const yapilanlar = document.querySelector('.yapilanlar');
 let veri = [];
 
 todoForm.addEventListener('submit', function(event) { //submit türü olan listeye inputtaki yazıyı ekler
@@ -17,17 +16,15 @@ function addTodo(item) { //eklenen verinin bilgileri
       isim: item,
       yapildi: false
     };
-
     veri.push(todo);
     addToLocalStorage(veri);
-
     todoInput.value = '';
   }
 }
 
 function renderVeri(veri) { // yazılan itemi aşağıya ekler
   todoItemsList.innerHTML = '';
-
+  yapilanlar.innerHTML = '';
   veri.forEach(function(item) {
     const kontrol = item.yapildi ? 'checked': null;
     const li = document.createElement('li');
@@ -36,17 +33,19 @@ function renderVeri(veri) { // yazılan itemi aşağıya ekler
     const yapildi = document.getElementById('yapildi');
     li.setAttribute('class', 'item');
     li.setAttribute('data-key', item.id);
+    todoItemsList.append(li);
     if (item.yapildi === true) {
       li.classList.add('checked');
       li.classList.remove('item');
+      yapilanlar.append(li)
     }
 
     li.innerHTML = `
       <input type="checkbox" class="checkbox" ${kontrol}>
       ${item.isim}
-      <button class="sil-buton">X</button>
+      <button class="sil-buton fa fa-trash"></button>
     `;
-    todoItemsList.append(li);
+      
 
     hepsi.innerHTML =
     "Hepsi: " + document.querySelectorAll("li").length;
@@ -93,6 +92,16 @@ window.location.reload()
 
 getFromLocalStorage();
 
+yapilanlar.addEventListener('click', function(event) {
+  if (event.target.type === 'checkbox') { // kutucuk işaretlenince data key günceller
+    toggle(event.target.parentElement.getAttribute('data-key'));
+  }
+
+  if (event.target.classList.contains('sil-buton')) { // silince data key günceller
+    deleteTodo(event.target.parentElement.getAttribute('data-key'));
+  }
+});
+
 todoItemsList.addEventListener('click', function(event) {
   if (event.target.type === 'checkbox') { // kutucuk işaretlenince data key günceller
     toggle(event.target.parentElement.getAttribute('data-key'));
@@ -104,10 +113,15 @@ todoItemsList.addEventListener('click', function(event) {
 });
 
 
-var temizleButon= document.querySelector(".temizle-buton"); //temizle tuşu
+let temizleButon= document.querySelector(".temizle-buton"); //temizle tuşu
 temizleButon.addEventListener('click', temizle, false); //temizle tuşu dinleme
 
 function temizle(e) { //temizle butonu işlevi
-	localStorage.clear();
-	window.location.reload();
+  e.preventDefault();
+  window.localStorage.clear();
+  todoItemsList.innerHTML = '';
+  veri = veri.filter(x => x.yapildi);
+  console.log(veri)
+  window.localStorage.setItem('veri', veri)
+  addToLocalStorage(veri);
 }
